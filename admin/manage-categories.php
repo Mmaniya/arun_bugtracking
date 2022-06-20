@@ -10,7 +10,7 @@ else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from tblcategory  WHERE id='$id'";
+$sql = "delete from category  WHERE id='$id'";
 $result = $conn->query($sql);
 
 $_SESSION['delmsg']="Category deleted scuccessfully ";
@@ -25,7 +25,7 @@ header('location:manage-categories.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Manage Categories</title>
+    <title>Bug Tracking | Manage Categories</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -111,26 +111,24 @@ header('location:manage-categories.php');
                                 </thead>
                                 <tbody>
                                     <?php
-        $sql = "SELECT * from  tblcategory";
+        $sql = "SELECT * from  category";
         $result = $conn->query($sql);
         $cnt=1;
         if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) { ?>
                                     <tr class="odd gradeX">
                                         <td class="center"><?php echo htmlentities($cnt); ?></td>
-                                        <td class="center"><?php echo htmlentities($row['CategoryName']); ?></td>
-                                        <td class="center"><?php if ($row['Status'] == 1) { ?>
+                                        <td class="center"><?php echo htmlentities($row['category']); ?></td>
+                                        <td class="center"><?php if ($row['status'] == 1) { ?>
                                             <a href="#" class="btn btn-success btn-xs">Active</a>
                                             <?php } else { ?>
                                             <a href="#" class="btn btn-danger btn-xs">Inactive</a>
                                             <?php } ?></td>
-                                        <td class="center"><?php echo htmlentities($row['CreationDate']); ?></td>
-                                        <td class="center"><?php echo htmlentities($row['UpdationDate']); ?></td>
+                                        <td class="center"><?php echo htmlentities($row['created_at']); ?></td>
+                                        <td class="center"><?php echo htmlentities($row['updated_at']); ?></td>
                                         <td class="center">
 
-                                            <a href="edit-category.php?catid=<?php echo htmlentities(
-                $row['id']
-            ); ?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button>
+                                           
                                                 <a href="manage-categories.php?del=<?php echo htmlentities(
                 $row['id']
             ); ?>" onclick="return confirm('Are you sure you want to delete?');" >  <button class=" btn btn-danger"><i class="fa fa-pencil"></i> Delete</button>

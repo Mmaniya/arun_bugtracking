@@ -9,18 +9,14 @@ header('location:index.php');
 else{ 
 if(isset($_POST['update']))
 {    
-$sid=$_SESSION['stdid'];  
-$fname=$_POST['fullanme'];
-$mobileno=$_POST['mobileno'];
+$id=$_SESSION['stdid'];  
+$name=$_POST['name'];
+$mobile=$_POST['mobile'];
 
-$sql="update tblstudents set FullName=:fname,MobileNumber=:mobileno where StudentId=:sid";
-$query = $dbh->prepare($sql);
-$query->bindParam(':sid',$sid,PDO::PARAM_STR);
-$query->bindParam(':fname',$fname,PDO::PARAM_STR);
-$query->bindParam(':mobileno',$mobileno,PDO::PARAM_STR);
-$query->execute();
+ $sql="update employee set `name` = '$name', `mobile`= '$mobile' where `id`= '$id'";
+$result = $conn->query($sql);
 
-echo '<script>alert("Your profile has been updated")</script>';
+// echo '<script>alert("Your profile has been updated")</script>';
 }
 
 ?>
@@ -35,7 +31,7 @@ echo '<script>alert("Your profile has been updated")</script>';
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Online Library Management System | Student Signup</title>
+    <title>Bug Tracking </title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -55,64 +51,56 @@ echo '<script>alert("Your profile has been updated")</script>';
              <div class="row mt-3">
            
 <div class="col-md-9 col-md-offset-1">
-               <div class="panel panel-danger">
+               <div class="panel panel-info">
                         <div class="panel-heading">
                            My Profile
                         </div>
                         <div class="panel-body">
                             <form name="signup" method="post">
 <?php 
-$sid=$_SESSION['stdid'];
-$sql="SELECT StudentId,FullName,EmailId,MobileNumber,RegDate,UpdationDate,Status from  tblstudents  where StudentId='$sid' ";
+ $sid=$_SESSION['stdid']; 
+ $sql="SELECT *, (Select category from category where id = employee.category_id) as category_name   from employee where id ='$sid' ";
 $result = $conn->query($sql);
 $cnt=1;
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-          
+      
        ?>  
 
 <div class="form-group">
-<label>Student ID : </label>
-<?php echo htmlentities($row['StudentId']);?>
-</div>
-
-<div class="form-group">
-<label>Reg Date : </label>
-<?php echo htmlentities($row['RegDate']);?>
+<label>Created Date : </label>
+<?php echo htmlentities($row['created_at']);?>
 </div>
 <?php if($row['UpdationDate']!=""){?>
 <div class="form-group">
 <label>Last Updation Date : </label>
-<?php echo htmlentities($row['UpdationDate']);?>
+<?php echo htmlentities($row['updated_at']);?>
 </div>
 <?php } ?>
 
 
+
 <div class="form-group">
-<label>Profile Status : </label>
-<?php if($row['Status']==1){?>
-<span style="color: green">Active</span>
-<?php } else { ?>
-<span style="color: red">Blocked</span>
-<?php }?>
+<label>Full Name</label>
+<input class="form-control" type="text" name="name" value="<?php echo htmlentities($row['name']);?>" autocomplete="off" required />
 </div>
 
 
 <div class="form-group">
-<label>Enter Full Name</label>
-<input class="form-control" type="text" name="fullanme" value="<?php echo htmlentities($row['FullName']);?>" autocomplete="off" required />
-</div>
-
-
-<div class="form-group">
-<label>Mobile Number :</label>
-<input class="form-control" type="text" name="mobileno" maxlength="10" value="<?php echo htmlentities($row['MobileNumber']);?>" autocomplete="off" required />
+<label>Mobile</label>
+<input class="form-control" type="text" name="mobile" maxlength="10" value="<?php echo htmlentities($row['mobile']);?>" autocomplete="off" required />
 </div>
                                         
 <div class="form-group">
-<label>Enter Email</label>
-<input class="form-control" type="email" name="email" id="emailid" value="<?php echo htmlentities($row['EmailId']);?>"  autocomplete="off" required readonly />
+<label>Email</label>
+<input class="form-control" type="email"  value="<?php echo htmlentities($row['email']);?>"  autocomplete="off" required readonly />
 </div>
+
+<div class="form-group">
+<label>Category</label>
+<input class="form-control" type="text" value="<?php echo htmlentities($row['category_name']);?>"  autocomplete="off" required readonly />
+</div>
+
 <?php }} ?>
                               
 <button type="submit" name="update" class="btn btn-primary" id="submit">Update Now </button>

@@ -31,7 +31,7 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Password Recovery </title>
+    <title>Bug Tracking | Password Recovery </title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -96,7 +96,7 @@ return true;
 <input type="text" class="form-control1"  name="vercode" maxlength="5" autocomplete="off" required  style="height:25px;" />&nbsp;<img src="captcha.php">
 </div> 
 
- <button type="submit" name="change" class="btn btn-info">Chnage Password</button> | <a href="index.php">Login</a>
+ <button type="submit" name="change" class="btn btn-info">Change Password</button> | <a href="index.php">Login</a>
 </form>
  </div>
 </div>

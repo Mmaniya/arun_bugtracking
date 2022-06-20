@@ -12,11 +12,11 @@ if(isset($_POST['change']))
 $password=md5($_POST['password']);
 $newpassword=md5($_POST['newpassword']);
 $email=$_SESSION['login'];
-  $sql ="SELECT Password FROM tblstudents WHERE EmailId='$email' and Password='$password'";
+  $sql ="SELECT Password FROM employee WHERE email='$email' and password='$password'";
   $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
-$sql1="update tblstudents set Password='$newpassword' where EmailId='$email'";
+$sql1="update employee set password='$newpassword' where email='$email'";
 $result = $conn->query($sql1);
 $msg="Your Password succesfully changed";
 }
@@ -33,7 +33,7 @@ $error="Your current password is wrong";
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | </title>
+    <title>Bug Tracking | </title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -107,7 +107,7 @@ Change Password
 <input class="form-control"  type="password" name="confirmpassword" autocomplete="off" required  />
 </div>
 
- <button type="submit" name="change" class="btn btn-info">Chnage </button> 
+ <button type="submit" name="change" class="btn btn-info">change </button> 
 </form>
  </div>
 </div>

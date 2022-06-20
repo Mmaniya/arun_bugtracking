@@ -15,7 +15,7 @@ if ($_POST["vercode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')  {
 
 $username=$_POST['username'];
 $password=md5($_POST['password']);
-$sql = "SELECT * FROM admin WHERE UserName ='$username' AND Password='$password'";
+$sql = "SELECT * FROM admin WHERE username ='$username' AND password='$password' AND role='A'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 $_SESSION['alogin']=$_POST['username'];
@@ -33,7 +33,7 @@ echo "<script>alert('Invalid Details');</script>";
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System</title>
+    <title>Bug Tracking</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->

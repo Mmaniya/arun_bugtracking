@@ -17,14 +17,15 @@ if ($_POST["vercode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')  {
 $email=$_POST['emailid'];
 $password=md5($_POST['password']);
 
-$sql = "SELECT * FROM tblstudents WHERE EmailId ='$email' AND Password='$password'";
+$sql = "SELECT * FROM employee WHERE email ='$email' AND password='$password'";   
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-     $_SESSION['stdid'] = $row['StudentId'];
-if($row['Status']==1)
+    $_SESSION['stdid'] = $row['id'];
+     $row['status'];
+if($row['status']==1)
 {
-$_SESSION['login']=$_POST['emailid'];
+ $_SESSION['login']=$_POST['emailid'];
 echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
 } else {
 echo "<script>alert('Your Account Has been blocked .Please contact admin');</script>";
@@ -47,7 +48,7 @@ echo "<script>alert('Invalid Details');</script>";
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | </title>
+    <title>Bug Tracking | </title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -60,7 +61,7 @@ echo "<script>alert('Invalid Details');</script>";
 </head>
 <body>
     <!------MENU SECTION START-->
-    <?php include('includes/header.php');?>
+    <?php  include('includes/header.php');?>
     <!-- MENU SECTION END-->
     <!-- <div class="content-wrapper"> -->
       <div class="container">
@@ -90,7 +91,7 @@ echo "<script>alert('Invalid Details');</script>";
                     <input type="text" class="form-control1" name="vercode" maxlength="5" autocomplete="off" required style="height:25px;" />&nbsp;<img src="captcha.php">
                   </div>
 
-                  <button type="submit" name="login" class="btn btn-info">LOGIN </button> | <a href="signup.php">Not Register Yet</a>
+                  <button type="submit" name="login" class="btn btn-info">LOGIN </button> 
                 </form>
               </div>
             </div>

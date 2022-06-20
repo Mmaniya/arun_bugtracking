@@ -12,12 +12,12 @@ if(isset($_POST['create']))
 {
 $category=$_POST['category'];
 $status=$_POST['status'];
-$sql="INSERT INTO  tblcategory(`CategoryName`,`Status`) VALUES('$category','$status')";
+$sql="INSERT INTO  category(`category`,`status`) VALUES('$category','$status')";
 $result = $conn->query($sql);
 $last_id = $conn->insert_id;
 if($last_id)
 {
-$_SESSION['msg']="Brand Listed successfully";
+$_SESSION['msg']="Categories Added successfully";
 header('location:manage-categories.php');
 }
 else 
@@ -35,7 +35,7 @@ header('location:manage-categories.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Add Categories</title>
+    <title>Bug Tracking | Add Categories</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
